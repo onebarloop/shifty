@@ -10,3 +10,12 @@ export async function getEvent(slug: string) {
     where: (event, { eq }) => eq(event.uuid, slug),
   });
 }
+
+export async function getEventData(slug: string) {
+  return db.query.events.findFirst({
+    where: (event, { eq }) => eq(event.uuid, slug),
+    with: {
+      tasks: true,
+    },
+  });
+}
