@@ -1,6 +1,6 @@
 import { getEventData } from "@/app/db/query";
-import TaskForm from "@/app/ui/event/task-form";
-import Task from "@/app/ui/event/task";
+import TaskForm from "@/app/ui/forms/task-form";
+import Task from "@/app/ui/task";
 
 export default async function Page({
   params,

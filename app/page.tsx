@@ -1,11 +1,18 @@
-import EventForm from "./ui/event-form";
-import Events from "./ui/events";
+import EventForm from "./ui/forms/event-form";
+import { getAllEvents } from "@/app/db/query";
+import Link from "next/link";
 
-export default function Home() {
-
+export default async function Home() {
+  const data = await getAllEvents();
   return (
     <>
-      <Events />
+      <ul className="flex flex-col gap-2">
+        {data.map((item) => (
+          <li key={item.id}>
+            <Link href={`/${item.uuid}`}> {item.name}</Link>
+          </li>
+        ))}
+      </ul>
       <EventForm />
     </>
   );
