@@ -17,7 +17,7 @@ export const usersRelations = relations(events, ({ many }) => ({
 export const tasks = pgTable("tasks", {
   id: serial("id").primaryKey(),
   name: text("name"),
-  eventId: integer("event_id"),
+  eventId: integer("event_id").references(() => events.id, {onDelete: 'cascade'}).notNull(),
 });
 
 export const tasksRelations = relations(tasks, ({ one }) => ({

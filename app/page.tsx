@@ -1,6 +1,6 @@
 import EventForm from "./ui/forms/event-form";
 import { getAllEvents } from "@/app/db/query";
-import Link from "next/link";
+import Event from "@/app/ui/event";
 
 export default async function Home() {
   const data = await getAllEvents();
@@ -8,9 +8,12 @@ export default async function Home() {
     <>
       <ul className="flex flex-col gap-2">
         {data.map((item) => (
-          <li key={item.id}>
-            <Link href={`/${item.uuid}`}> {item.name}</Link>
-          </li>
+          <Event
+            key={item.id}
+            name={item.name!}
+            uuid={item.uuid}
+            id={item.id}
+          />
         ))}
       </ul>
       <EventForm />

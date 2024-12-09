@@ -25,5 +25,11 @@ export async function createTask(eventId: number, formData: FormData) {
 
 export async function deleteTask(taskId: number) {
   await db.delete(tasks).where(eq(tasks.id, taskId));
-  revalidatePath(`/[slug]`, 'page');
+  revalidatePath('/[slug]', 'page');
 }
+
+export async function deleteEvent(taskId: number) {
+  await db.delete(events).where(eq(events.id, taskId));
+  revalidatePath('/', 'page');
+}
+
