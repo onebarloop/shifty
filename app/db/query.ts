@@ -1,5 +1,5 @@
-import "dotenv/config";
-import { db } from "./db";
+import 'dotenv/config';
+import { db } from './db';
 
 export async function getAllEvents() {
   return db.query.events.findMany();

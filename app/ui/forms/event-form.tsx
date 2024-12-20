@@ -1,4 +1,4 @@
-import { createEvent } from "@/app/lib/actions";
+import { createEvent } from '@/app/lib/actions';
 
 export default function EventForm() {
   return (

@@ -1,10 +1,6 @@
-import { createTask } from "@/app/lib/actions";
+import { createTask } from '@/app/lib/actions';
 
-export default function TaskForm({
-  eventId,
-}: {
-  eventId: number;
-}) {
+export default function TaskForm({ eventId }: { eventId: number }) {
   const createTaskWithId = createTask.bind(null, eventId);
   return (
     <form action={createTaskWithId}>

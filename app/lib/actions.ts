@@ -1,20 +1,20 @@
-"use server";
+'use server';
 
-import { events, tasks } from "../db/schema";
-import { db } from "../db/db";
-import { revalidatePath } from "next/cache";
-import { eq } from "drizzle-orm";
+import { events, tasks } from '../db/schema';
+import { db } from '../db/db';
+import { revalidatePath } from 'next/cache';
+import { eq } from 'drizzle-orm';
 
 export async function createEvent(formData: FormData) {
-  const eventName = formData.get("name");
+  const eventName = formData.get('name');
   if (eventName) {
     await db.insert(events).values({ name: eventName as string });
-    revalidatePath("/");
+    revalidatePath('/');
   }
 }
 
 export async function createTask(eventId: number, formData: FormData) {
-  const taskName = formData.get("name");
+  const taskName = formData.get('name');
   if (taskName) {
     await db
       .insert(tasks)
@@ -32,4 +32,3 @@ export async function deleteEvent(taskId: number) {
   await db.delete(events).where(eq(events.id, taskId));
   revalidatePath('/', 'page');
 }
-

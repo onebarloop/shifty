@@ -1,6 +1,6 @@
-import EventForm from "./ui/forms/event-form";
-import { getAllEvents } from "@/app/db/query";
-import Event from "@/app/ui/event";
+import EventForm from './ui/forms/event-form';
+import { getAllEvents } from '@/app/db/query';
+import Event from '@/app/ui/event';
 
 export default async function Home() {
   const data = await getAllEvents();

@@ -1,6 +1,6 @@
-import DeleteButton from "@/app/ui/buttons/delete-button";
-import { deleteEvent } from "@/app/lib/actions";
-import Link from "next/link";
+import DeleteButton from '@/app/ui/buttons/delete-button';
+import { deleteEvent } from '@/app/lib/actions';
+import Link from 'next/link';
 
 export default function Event({
   name,
