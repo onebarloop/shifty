@@ -2,33 +2,24 @@ import DeleteButton from '@/app/ui/buttons/delete-button';
 import { deleteTimeslot } from '@/app/lib/actions';
 import Member from '@/app/ui/member';
 import MemberForm from '@/app/ui/forms/member-form';
+import type { Timeslot } from '@/app/interfaces/interfaces';
 
-export default function Timeslot({
-  from,
-  to,
-  id,
-  members,
-}: {
-  from: number;
-  to: number;
-  id: number;
-  members: { id: number; name: string }[];
-}) {
+export default function Timeslot({ slot }: { slot: Timeslot }) {
   return (
     <>
       <li>
         <div className="flex gap-2">
           <span>
-            {from} - {to}
+            {slot.from} - {slot.to}
           </span>
-          <DeleteButton deleteItemAction={deleteTimeslot} id={id} />
+          <DeleteButton deleteItemAction={deleteTimeslot} id={slot.id} />
         </div>
         <ul>
-          {members.map((member) => (
-            <Member key={member.id} name={member.name} />
+          {slot.members.map((member) => (
+            <Member key={member.id} member={member} />
           ))}
         </ul>
-        <MemberForm timeslotId={id} />
+        <MemberForm timeslotId={slot.id} />
       </li>
     </>
   );

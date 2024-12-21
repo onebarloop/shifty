@@ -7,7 +7,7 @@ export const events = pgTable('events', {
   uuid: char('uuid', { length: 36 })
     .$defaultFn(() => randomUUID())
     .notNull(),
-  name: text('name'),
+  name: text('name').notNull(),
 });
 
 export const eventsRelations = relations(events, ({ many }) => ({
@@ -16,7 +16,7 @@ export const eventsRelations = relations(events, ({ many }) => ({
 
 export const tasks = pgTable('tasks', {
   id: serial('id').primaryKey(),
-  name: text('name'),
+  name: text('name').notNull(),
   eventId: integer('event_id')
     .references(() => events.id, { onDelete: 'cascade' })
     .notNull(),

@@ -16,12 +16,7 @@ export default async function Page({
         <div>Event: {event.name}</div>
         <ul className="mb-12">
           {event.tasks.map((task) => (
-            <Task
-              key={task.id}
-              name={task.name!}
-              id={task.id}
-              timeslots={task.timeslots}
-            />
+            <Task key={task.id} task={task} />
           ))}
         </ul>
         <TaskForm eventId={event.id} />
