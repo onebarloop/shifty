@@ -6,7 +6,7 @@ export default async function Home() {
   const data = await getAllEvents();
   return (
     <>
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-2 mb-12">
         {data.map((item) => (
           <Event
             key={item.id}

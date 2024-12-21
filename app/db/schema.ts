@@ -10,7 +10,7 @@ export const events = pgTable('events', {
   name: text('name'),
 });
 
-export const usersRelations = relations(events, ({ many }) => ({
+export const eventsRelations = relations(events, ({ many }) => ({
   tasks: many(tasks),
 }));
 
@@ -22,9 +22,26 @@ export const tasks = pgTable('tasks', {
     .notNull(),
 });
 
-export const tasksRelations = relations(tasks, ({ one }) => ({
+export const tasksRelations = relations(tasks, ({ one, many }) => ({
   event: one(events, {
     fields: [tasks.eventId],
     references: [events.id],
+  }),
+  timeslots: many(timeslots),
+}));
+
+export const timeslots = pgTable('timeslots', {
+  id: serial('id').primaryKey(),
+  from: integer('from').notNull(),
+  to: integer('to').notNull(),
+  taskId: integer('task_id')
+    .references(() => tasks.id, { onDelete: 'cascade' })
+    .notNull(),
+});
+
+export const timeslotsRelations = relations(timeslots, ({ one }) => ({
+  task: one(tasks, {
+    fields: [timeslots.taskId],
+    references: [tasks.id],
   }),
 }));
