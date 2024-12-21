@@ -19,11 +19,11 @@ export async function getEventData(slug: string) {
         with: {
           timeslots: {
             with: {
-              members: true
-            }
-          }
-        }
-      }
+              members: true,
+            },
+          },
+        },
+      },
     },
   });
 }
