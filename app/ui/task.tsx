@@ -24,7 +24,7 @@ export default function Task({
         <DeleteButton deleteItemAction={deleteTask} id={id} />
       </div>
 
-      <ul className="ml-4">
+      <ul className="ml-4 mb-2">
         {timeslots.map((slot) => (
           <Timeslot
             key={slot.id}
