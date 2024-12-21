@@ -39,9 +39,25 @@ export const timeslots = pgTable('timeslots', {
     .notNull(),
 });
 
-export const timeslotsRelations = relations(timeslots, ({ one }) => ({
+export const timeslotsRelations = relations(timeslots, ({ one, many }) => ({
   task: one(tasks, {
     fields: [timeslots.taskId],
     references: [tasks.id],
+  }),
+  members: many(members)
+}));
+
+export const members = pgTable('members', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  timeslotId: integer('timeslot_id')
+    .references(() => timeslots.id, { onDelete: 'cascade' })
+    .notNull(),
+});
+
+export const membersRelations = relations(members, ({ one }) => ({
+  timeslot: one(timeslots, {
+    fields: [members.timeslotId],
+    references: [timeslots.id],
   }),
 }));

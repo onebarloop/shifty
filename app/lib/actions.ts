@@ -1,6 +1,6 @@
 'use server';
 
-import { events, tasks, timeslots } from '../db/schema';
+import { events, tasks, timeslots, members } from '../db/schema';
 import { db } from '../db/db';
 import { revalidatePath } from 'next/cache';
 import { eq } from 'drizzle-orm';
@@ -30,6 +30,16 @@ export async function createTimeslot(taskId: number, formData: FormData) {
     await db
       .insert(timeslots)
       .values({ from: Number(from), to: Number(to), taskId: taskId });
+    revalidatePath(`/[slug]`, 'page');
+  }
+}
+
+export async function createMember(timeslotId: number, formData: FormData) {
+  const name = formData.get('name');
+  if (name) {
+    await db
+      .insert(members)
+      .values({ name: name as string, timeslotId: timeslotId });
     revalidatePath(`/[slug]`, 'page');
   }
 }

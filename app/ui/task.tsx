@@ -1,5 +1,5 @@
 import DeleteButton from '@/app/ui/buttons/delete-button';
-import Timeslot from '@/app/ui/timeslots';
+import Timeslot from '@/app/ui/timeslot';
 import { deleteTask } from '@/app/lib/actions';
 import TimeslotForm from '@/app/ui/forms/timeslot-form';
 
@@ -10,7 +10,12 @@ export default function Task({
 }: {
   name: string;
   id: number;
-  timeslots: { id: number; from: number; to: number }[];
+  timeslots: {
+    id: number;
+    from: number;
+    to: number;
+    members: { id: number; name: string }[];
+  }[];
 }) {
   return (
     <li>
@@ -21,10 +26,16 @@ export default function Task({
 
       <ul className="ml-4">
         {timeslots.map((slot) => (
-          <Timeslot key={slot.id} from={slot.from} to={slot.to} id={slot.id} />
+          <Timeslot
+            key={slot.id}
+            from={slot.from}
+            to={slot.to}
+            id={slot.id}
+            members={slot.members}
+          />
         ))}
-        <TimeslotForm taskId={id} />
       </ul>
+      <TimeslotForm taskId={id} />
     </li>
   );
 }

@@ -17,7 +17,11 @@ export async function getEventData(slug: string) {
     with: {
       tasks: {
         with: {
-          timeslots: true
+          timeslots: {
+            with: {
+              members: true
+            }
+          }
         }
       }
     },
