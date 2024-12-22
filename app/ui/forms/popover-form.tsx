@@ -7,13 +7,15 @@ import {
 export default function PopoverForm({
   text = 'Popover',
   children,
+  className,
 }: {
   text: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
     <Popover>
-      <PopoverTrigger>{text}</PopoverTrigger>
+      <PopoverTrigger className={className}>{text}</PopoverTrigger>
       <PopoverContent>{children}</PopoverContent>
     </Popover>
   );

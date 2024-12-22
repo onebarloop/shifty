@@ -1,6 +1,6 @@
 import { getEventData } from '@/app/db/query';
 import TaskForm from '@/app/ui/forms/task-form';
-import Task from '@/app/ui/task';
+import TaskCard from '@/app/ui/task-card';
 
 export default async function Page({
   params,
@@ -13,13 +13,13 @@ export default async function Page({
   if (event)
     return (
       <>
-        <div>Event: {event.name}</div>
-        <ul className="mb-12">
+        <h1 className="text-2xl font-bold underline mb-4">Event: {event.name}</h1>
+        <div className="flex flex-col gap-2">
           {event.tasks.map((task) => (
-            <Task key={task.id} task={task} />
+            <TaskCard key={task.id} task={task}></TaskCard>
           ))}
-        </ul>
-        <TaskForm eventId={event.id} />
+          <TaskForm eventId={event.id} />
+        </div>
       </>
     );
   else return <div>Event not found</div>;

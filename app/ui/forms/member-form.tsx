@@ -1,7 +1,7 @@
 import { createMember } from '@/app/lib/actions';
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 export default function MemberForm({ timeslotId }: { timeslotId: number }) {
   const createTaskWithId = createMember.bind(null, timeslotId);
@@ -9,7 +9,7 @@ export default function MemberForm({ timeslotId }: { timeslotId: number }) {
     <form action={createTaskWithId}>
       <Label htmlFor="name">Add Member</Label>
       <Input name="name" id="name" type="text" />
-      <button type="submit">Submit</button>
+      <Button type="submit">Submit</Button>
     </form>
   );
 }
