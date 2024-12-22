@@ -3,6 +3,7 @@ import { deleteTimeslot } from '@/app/lib/actions';
 import Member from '@/app/ui/member';
 import MemberForm from '@/app/ui/forms/member-form';
 import type { Timeslot } from '@/app/interfaces/interfaces';
+import PopoverForm from '@/app/ui/forms/popover-form';
 
 export default function Timeslot({ slot }: { slot: Timeslot }) {
   return (
@@ -19,7 +20,9 @@ export default function Timeslot({ slot }: { slot: Timeslot }) {
             <Member key={member.id} member={member} />
           ))}
         </ul>
-        <MemberForm timeslotId={slot.id} />
+        <PopoverForm text="Add Member">
+          <MemberForm timeslotId={slot.id} />
+        </PopoverForm>
       </li>
     </>
   );
