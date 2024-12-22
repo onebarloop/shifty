@@ -44,7 +44,7 @@ export const timeslotsRelations = relations(timeslots, ({ one, many }) => ({
     fields: [timeslots.taskId],
     references: [tasks.id],
   }),
-  members: many(members),
+  members: many(members)
 }));
 
 export const members = pgTable('members', {

@@ -3,7 +3,6 @@ import { deleteTimeslot } from '@/app/lib/actions';
 import Member from '@/app/ui/member';
 import MemberForm from '@/app/ui/forms/member-form';
 import type { Timeslot } from '@/app/interfaces/interfaces';
-import FormWrapper from '@/app/ui/forms/form-wrapper';
 
 export default function Timeslot({ slot }: { slot: Timeslot }) {
   return (
@@ -20,7 +19,7 @@ export default function Timeslot({ slot }: { slot: Timeslot }) {
             <Member key={member.id} member={member} />
           ))}
         </ul>
-        <FormWrapper type="member" id={slot.id} />
+        <MemberForm timeslotId={slot.id} />
       </li>
     </>
   );
