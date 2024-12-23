@@ -1,9 +1,7 @@
 import DeleteButton from '@/app/ui/buttons/delete-button';
 import { deleteTimeslot } from '@/app/lib/actions';
 import Member from '@/app/ui/member';
-import MemberForm from '@/app/ui/forms/member-form';
 import type { Timeslot } from '@/app/interfaces/interfaces';
-import PopoverForm from '@/app/ui/forms/popover-form';
 import {
   Table,
   TableBody,
@@ -13,6 +11,12 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import TimeslotForm from '@/app/ui/forms/timeslot-form';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import AddMemberButton from '@/app/ui/buttons/add-member';
 
 export default function TimeslotTable({
   slots,
@@ -36,7 +40,7 @@ export default function TimeslotTable({
             <TableRow key={slot.id}>
               <TableCell>
                 <DeleteButton
-                  className="h-6 "
+                  className="h-5"
                   deleteItemAction={deleteTimeslot}
                   id={slot.id}
                 />
@@ -48,17 +52,18 @@ export default function TimeslotTable({
                 {slot.members.map((member) => (
                   <Member key={member.id} member={member} />
                 ))}
-                <PopoverForm className="opacity-50" text="+">
-                  <MemberForm timeslotId={slot.id} />
-                </PopoverForm>
+                <AddMemberButton timeslotId={slot.id} />
               </TableCell>
             </TableRow>
           ))}
           <TableRow>
             <TableCell colSpan={3}>
-              <PopoverForm className="w-full" text="Add Timeslot">
-                <TimeslotForm taskId={taskId} />
-              </PopoverForm>
+              <Popover>
+                <PopoverTrigger className="w-full">Add Timeslot</PopoverTrigger>
+                <PopoverContent>
+                  <TimeslotForm taskId={taskId} />
+                </PopoverContent>
+              </Popover>
             </TableCell>
           </TableRow>
         </TableBody>

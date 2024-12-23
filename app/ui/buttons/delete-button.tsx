@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 export default function DeleteButton({
   deleteItemAction,
   id,
-  className
+  className,
 }: {
   deleteItemAction: (id: number) => Promise<void>;
   id: number;
