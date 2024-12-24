@@ -1,14 +1,37 @@
 'use client';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 export default function DeleteButton({
   deleteItemAction,
   id,
-  className,
+  children
 }: {
   deleteItemAction: (id: number) => Promise<void>;
   id: number;
-  className?: string;
+  children: React.ReactNode;
 }) {
-  return <Button className={className} onClick={async () => deleteItemAction(id)}>X</Button>;
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        {children}
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone.
+          </DialogDescription>
+          <Button onClick={async () => deleteItemAction(id)}>Yes</Button>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  );
 }

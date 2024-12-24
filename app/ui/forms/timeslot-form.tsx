@@ -6,12 +6,12 @@ import { Button } from '@/components/ui/button';
 export default function TimeslotForm({ taskId }: { taskId: number }) {
   const createTimeslotWithId = createTimeslot.bind(null, taskId);
   return (
-    <form action={createTimeslotWithId}>
+    <form className="flex flex-col gap-2" action={createTimeslotWithId}>
       <Label htmlFor="from">From</Label>
-      <Input className="text-black" name="from" id="from" type="number" />
+      <Input name="from" id="from" type="number" />
       <Label htmlFor="to">To</Label>
-      <Input className="text-black" name="to" id="to" type="number" />
-      <Button type="submit">Submit</Button>
+      <Input name="to" id="to" type="number" />
+      <Button type="submit">Add Timeslot</Button>
     </form>
   );
 }

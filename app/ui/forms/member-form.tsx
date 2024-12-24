@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 export default function MemberForm({ timeslotId }: { timeslotId: number }) {
   const createMemberWithId = createMember.bind(null, timeslotId);
   return (
-    <form action={createMemberWithId}>
+    <form className="flex flex-col gap-2" action={createMemberWithId}>
       <Label htmlFor="name">Add Member</Label>
       <Input name="name" id="name" type="text" />
       <Button type="submit">Submit</Button>

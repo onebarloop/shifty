@@ -4,23 +4,36 @@ import { Button } from '@/components/ui/button';
 import DeleteButton from '@/app/ui/buttons/delete-button';
 import { deleteMember, updateMember } from '@/app/lib/actions';
 import { Member } from '@/app/interfaces/interfaces';
+import { Trash2 } from 'lucide-react';
 
 export default function EditMemberForm({
   member,
   onSubmit,
 }: {
   member: Member;
-  onSubmit: (arg: boolean) => void;
+  onSubmit: () => void;
 }) {
   const updateMemberWithId = updateMember.bind(null, member.id);
+
   return (
     <>
-      <form action={updateMemberWithId} onSubmit={() => onSubmit(false)}>
+      <form
+        className="flex flex-col gap-2"
+        action={updateMemberWithId}
+        onSubmit={onSubmit}
+      >
         <Label htmlFor="name">Edit Member</Label>
         <Input name="name" id="name" type="text" defaultValue={member.name} />
-        <Button type="submit">Submit</Button>
+
+        <div className="flex justify-between">
+          <Button type="submit">Edit</Button>
+          <DeleteButton deleteItemAction={deleteMember} id={member.id}>
+            <Button>
+              <Trash2 />
+            </Button>
+          </DeleteButton>
+        </div>
       </form>
-      <DeleteButton deleteItemAction={deleteMember} id={member.id} />
     </>
   );
 }

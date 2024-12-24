@@ -17,6 +17,9 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import AddMemberButton from '@/app/ui/buttons/add-member';
+import { Button } from '@/components/ui/button';
+import { Trash2, Pencil } from 'lucide-react';
+import EditButton from '@/app/ui/buttons/edit-button';
 
 export default function TimeslotTable({
   slots,
@@ -30,7 +33,7 @@ export default function TimeslotTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[50px]"></TableHead>
+            <TableHead className="w-[90px]">Edit</TableHead>
             <TableHead className="w-[200px]">Time</TableHead>
             <TableHead>People</TableHead>
           </TableRow>
@@ -38,17 +41,22 @@ export default function TimeslotTable({
         <TableBody>
           {slots.map((slot) => (
             <TableRow key={slot.id}>
-              <TableCell>
-                <DeleteButton
-                  className="h-5"
-                  deleteItemAction={deleteTimeslot}
-                  id={slot.id}
-                />
+              <TableCell className="inline-flex gap-2">
+                <DeleteButton deleteItemAction={deleteTimeslot} id={slot.id}>
+                  <Button className="h-6 w-6" size="sm" variant="secondary">
+                    <Trash2 />
+                  </Button>
+                </DeleteButton>
+                <EditButton>
+                  <Button className="h-6 w-6" size="sm" variant="secondary">
+                    <Pencil />
+                  </Button>
+                </EditButton>
               </TableCell>
               <TableCell className="font-medium">
                 {slot.from}-{slot.to}
               </TableCell>
-              <TableCell className="flex gap-2">
+              <TableCell className="inline-flex gap-2">
                 {slot.members.map((member) => (
                   <Member key={member.id} member={member} />
                 ))}
