@@ -5,11 +5,17 @@ import DeleteButton from '@/app/ui/buttons/delete-button';
 import { deleteMember, updateMember } from '@/app/lib/actions';
 import { Member } from '@/app/interfaces/interfaces';
 
-export default function EditMemberForm({ member }: { member: Member }) {
+export default function EditMemberForm({
+  member,
+  onSubmit,
+}: {
+  member: Member;
+  onSubmit: (arg: boolean) => void;
+}) {
   const updateMemberWithId = updateMember.bind(null, member.id);
   return (
     <>
-      <form action={updateMemberWithId}>
+      <form action={updateMemberWithId} onSubmit={() => onSubmit(false)}>
         <Label htmlFor="name">Edit Member</Label>
         <Input name="name" id="name" type="text" defaultValue={member.name} />
         <Button type="submit">Submit</Button>
