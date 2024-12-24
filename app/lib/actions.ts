@@ -56,5 +56,21 @@ export async function deleteEvent(taskId: number) {
 
 export async function deleteTimeslot(timeslotId: number) {
   await db.delete(timeslots).where(eq(timeslots.id, timeslotId));
-  revalidatePath('/', 'page');
+  revalidatePath('/[slug]', 'page');
+}
+
+export async function deleteMember(memberId: number) {
+  await db.delete(members).where(eq(members.id, memberId));
+  revalidatePath('/[slug]', 'page');
+}
+
+export async function updateMember(memberId: number, formData: FormData) {
+  const name = formData.get('name');
+  if (name) {
+    await db
+      .update(members)
+      .set({ name: name as string })
+      .where(eq(members.id, memberId));
+    revalidatePath('/[slug]', 'page');
+  }
 }

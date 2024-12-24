@@ -4,9 +4,9 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 
 export default function MemberForm({ timeslotId }: { timeslotId: number }) {
-  const createTaskWithId = createMember.bind(null, timeslotId);
+  const createMemberWithId = createMember.bind(null, timeslotId);
   return (
-    <form action={createTaskWithId}>
+    <form action={createMemberWithId}>
       <Label htmlFor="name">Add Member</Label>
       <Input name="name" id="name" type="text" />
       <Button type="submit">Submit</Button>

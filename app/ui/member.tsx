@@ -6,6 +6,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
+import EditMemberForm from '@/app/ui/forms/edit-member-form';
 
 export default function Member({ member }: { member: Member }) {
   return (
@@ -15,7 +16,9 @@ export default function Member({ member }: { member: Member }) {
           <Badge>{member.name}</Badge>
         </Button>
       </PopoverTrigger>
-      <PopoverContent>...to be implemented</PopoverContent>
+      <PopoverContent>
+        <EditMemberForm member={member} />
+      </PopoverContent>
     </Popover>
   );
 }
