@@ -64,13 +64,20 @@ export async function deleteMember(memberId: number) {
   revalidatePath('/[slug]', 'page');
 }
 
-export async function updateMember(memberId: number, formData: FormData) {
+export async function updateMember(
+  state: string | undefined,
+  formData: FormData
+) {
+  console.log(state)
   const name = formData.get('name');
-  if (name) {
+  const id = formData.get('id');
+  if (name && id) {
     await db
       .update(members)
       .set({ name: name as string })
-      .where(eq(members.id, memberId));
+      .where(eq(members.id, Number(id)));
+    //await new Promise((resolve) => setTimeout(resolve, 2000));
     revalidatePath('/[slug]', 'page');
+    return 'test';
   }
 }
