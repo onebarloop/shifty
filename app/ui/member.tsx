@@ -22,7 +22,7 @@ export default function Member({ member }: { member: Member }) {
         </Button>
       </PopoverTrigger>
       <PopoverContent>
-        <EditMemberForm onSubmit={() => setIsOpen(false)} member={member} />
+        <EditMemberForm closeForm={() => setIsOpen(false)} member={member} />
       </PopoverContent>
     </Popover>
   );

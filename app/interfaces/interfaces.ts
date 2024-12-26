@@ -22,3 +22,8 @@ export interface Member {
   id: number;
   name: string;
 }
+
+export interface Response {
+  success: boolean;
+  message: string;
+}

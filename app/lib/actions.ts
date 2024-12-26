@@ -4,6 +4,7 @@ import { events, tasks, timeslots, members } from '../db/schema';
 import { db } from '../db/db';
 import { revalidatePath } from 'next/cache';
 import { eq } from 'drizzle-orm';
+import  type { Response} from '@/app/interfaces/interfaces';
 
 export async function createEvent(formData: FormData) {
   const eventName = formData.get('name');
@@ -65,10 +66,9 @@ export async function deleteMember(memberId: number) {
 }
 
 export async function updateMember(
-  state: string | undefined,
+  state: Response | undefined,
   formData: FormData
-) {
-  console.log(state)
+): Promise<Response> {
   const name = formData.get('name');
   const id = formData.get('id');
   if (name && id) {
@@ -78,6 +78,7 @@ export async function updateMember(
       .where(eq(members.id, Number(id)));
     //await new Promise((resolve) => setTimeout(resolve, 2000));
     revalidatePath('/[slug]', 'page');
-    return 'test';
+    return {success: true, message: 'Member updated'};
   }
+  return {success: false, message: 'Member update failed'};
 }

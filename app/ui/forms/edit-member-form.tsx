@@ -1,5 +1,3 @@
-'use client';
-
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -8,26 +6,30 @@ import { deleteMember, updateMember } from '@/app/lib/actions';
 import { Member } from '@/app/interfaces/interfaces';
 import { Trash2 } from 'lucide-react';
 import { useActionState, useEffect } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 export default function EditMemberForm({
   member,
-  onSubmit,
+  closeForm,
 }: {
   member: Member;
-  onSubmit: () => void;
+  closeForm: () => void;
 }) {
-  /*  const updateMemberWithId = updateMember.bind(null,member.id)*/
-
-  const [state, action, isPending] = useActionState(
-    updateMember,
-    'INITIAL_STATE'
-  );
+  const [state, action] = useActionState(updateMember, undefined);
+  const { toast } = useToast();
 
   useEffect(() => {
-    if (state === 'test') {
-      onSubmit();
+    if (state) {
+      toast({
+        title: 'Update Member',
+        description: state.message,
+      });
     }
-  });
+    if (state?.success) {
+      closeForm();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
 
   return (
     <>
