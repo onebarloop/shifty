@@ -19,11 +19,13 @@ export async function getEventData(slug: string) {
         with: {
           timeslots: {
             with: {
-              members: true
-            }
-          }
-        }
-      }
+              members: {
+                orderBy: (members, { asc }) => [asc(members.id)],
+              },
+            },
+          },
+        },
+      },
     },
   });
 }
