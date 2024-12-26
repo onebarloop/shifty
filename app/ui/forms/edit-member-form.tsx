@@ -15,7 +15,7 @@ export default function EditMemberForm({
   member: Member;
   closeForm: () => void;
 }) {
-  const [state, action] = useActionState(updateMember, undefined);
+  const [state, action, pending] = useActionState(updateMember, undefined);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function EditMemberForm({
         <Input name="name" id="name" type="text" defaultValue={member.name} />
 
         <div className="flex justify-between">
-          <Button type="submit">Edit</Button>
+          <Button type="submit" disabled={pending}>Edit</Button>
           <DeleteButton deleteItemAction={deleteMember} id={member.id}>
             <Button>
               <Trash2 />

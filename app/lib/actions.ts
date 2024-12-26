@@ -4,8 +4,9 @@ import { events, tasks, timeslots, members } from '../db/schema';
 import { db } from '../db/db';
 import { revalidatePath } from 'next/cache';
 import { eq } from 'drizzle-orm';
-import  type { Response} from '@/app/interfaces/interfaces';
+import type { Response } from '@/app/interfaces/interfaces';
 
+// CREATE
 export async function createEvent(formData: FormData) {
   const eventName = formData.get('name');
   if (eventName) {
@@ -35,35 +36,65 @@ export async function createTimeslot(taskId: number, formData: FormData) {
   }
 }
 
-export async function createMember(timeslotId: number, formData: FormData) {
+export async function createMember(
+  state: Response | undefined,
+  formData: FormData
+): Promise<Response> {
   const name = formData.get('name');
-  if (name) {
+  const id = formData.get('id');
+  if (name && id) {
     await db
       .insert(members)
-      .values({ name: name as string, timeslotId: timeslotId });
+      .values({ name: name as string, timeslotId: Number(id) });
     revalidatePath(`/[slug]`, 'page');
+    return { success: true, message: `Member added! ${name} joins the Team!` };
+  }
+  return { success: false, message: 'Failed to add member.' };
+}
+
+// DELETE
+
+export async function deleteTask(taskId: number): Promise<Response> {
+  try {
+    await db.delete(tasks).where(eq(tasks.id, taskId));
+    revalidatePath('/[slug]', 'page');
+    return { success: true, message: 'Task deleted successfully.' };
+  } catch {
+    return { success: false, message: 'Something went wrong' };
   }
 }
 
-export async function deleteTask(taskId: number) {
-  await db.delete(tasks).where(eq(tasks.id, taskId));
-  revalidatePath('/[slug]', 'page');
+export async function deleteEvent(taskId: number): Promise<Response> {
+  try {
+    await db.delete(events).where(eq(events.id, taskId));
+    revalidatePath('/', 'page');
+    return { success: true, message: 'Event deleted successfully.' };
+  } catch {
+    return { success: false, message: 'Something went wrong' };
+  }
 }
 
-export async function deleteEvent(taskId: number) {
-  await db.delete(events).where(eq(events.id, taskId));
-  revalidatePath('/', 'page');
+export async function deleteTimeslot(timeslotId: number): Promise<Response> {
+  try {
+    await db.delete(timeslots).where(eq(timeslots.id, timeslotId));
+    revalidatePath('/[slug]', 'page');
+    return { success: true, message: 'Timeslot deleted successfully.' };
+  } catch {
+    return { success: false, message: 'Something went wrong' };
+  }
 }
 
-export async function deleteTimeslot(timeslotId: number) {
-  await db.delete(timeslots).where(eq(timeslots.id, timeslotId));
-  revalidatePath('/[slug]', 'page');
+export async function deleteMember(memberId: number): Promise<Response> {
+  try {
+    await db.delete(members).where(eq(members.id, memberId));
+    revalidatePath('/[slug]', 'page');
+    return { success: true, message: 'Member deleted successfully.' };
+  } catch {
+    return { success: false, message: 'Something went wrong' };
+  }
 }
 
-export async function deleteMember(memberId: number) {
-  await db.delete(members).where(eq(members.id, memberId));
-  revalidatePath('/[slug]', 'page');
-}
+// UPDATE
 
 export async function updateMember(
   state: Response | undefined,
@@ -76,9 +107,8 @@ export async function updateMember(
       .update(members)
       .set({ name: name as string })
       .where(eq(members.id, Number(id)));
-    //await new Promise((resolve) => setTimeout(resolve, 2000));
     revalidatePath('/[slug]', 'page');
-    return {success: true, message: 'Member updated'};
+    return { success: true, message: 'Member updated' };
   }
-  return {success: false, message: 'Member update failed'};
+  return { success: false, message: 'Member update failed' };
 }
