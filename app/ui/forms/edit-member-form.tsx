@@ -36,9 +36,8 @@ export default function EditMemberForm({
       <form className="flex flex-col gap-2" action={action}>
         <input
           readOnly
-          id="id"
           name="id"
-          className="hidden"
+          type="hidden"
           value={member.id}
         />
         <Label htmlFor="name">Edit Member</Label>
