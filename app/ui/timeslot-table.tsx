@@ -33,15 +33,15 @@ export default function TimeslotTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[90px]">Edit</TableHead>
-            <TableHead className="w-[200px]">Time</TableHead>
+            <TableHead className="sm:w-[100px]">Edit</TableHead>
+            <TableHead className="sm:w-[100px]">Time</TableHead>
             <TableHead>People</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {slots.map((slot) => (
             <TableRow key={slot.id}>
-              <TableCell className="inline-flex gap-2">
+              <TableCell className="inline-flex flex-wrap gap-2">
                 <DeleteButton deleteItemAction={deleteTimeslot} id={slot.id}>
                   <Button className="h-6 w-6" size="sm" variant="secondary">
                     <Trash2 />
@@ -53,10 +53,10 @@ export default function TimeslotTable({
                   </Button>
                 </EditButton>
               </TableCell>
-              <TableCell className="font-medium">
+              <TableCell className="font-medium align">
                 {slot.from}-{slot.to}
               </TableCell>
-              <TableCell className="inline-flex gap-2">
+              <TableCell className="inline-flex flex-wrap gap-2">
                 {slot.members.map((member) => (
                   <Member key={member.id} member={member} />
                 ))}
