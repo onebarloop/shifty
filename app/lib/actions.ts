@@ -25,15 +25,21 @@ export async function createTask(eventId: number, formData: FormData) {
   }
 }
 
-export async function createTimeslot(taskId: number, formData: FormData) {
+export async function createTimeslot(
+  state: Response | undefined,
+  formData: FormData
+): Promise<Response> {
   const from = formData.get('from');
   const to = formData.get('to');
-  if (from && to) {
+  const id = formData.get('id');
+  if (from && to && id) {
     await db
       .insert(timeslots)
-      .values({ from: Number(from), to: Number(to), taskId: taskId });
+      .values({ from: Number(from), to: Number(to), taskId: Number(id) });
     revalidatePath(`/[slug]`, 'page');
+    return { success: true, message: `Timeslot added` };
   }
+  return { success: false, message: `Failed to create timeslot` };
 }
 
 export async function createMember(

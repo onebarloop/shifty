@@ -15,7 +15,7 @@ export default function DeleteButton({
   deleteItemAction,
   id,
   children,
-  type
+  type,
 }: {
   deleteItemAction: (id: number) => Promise<Response>;
   id: number;
@@ -26,7 +26,7 @@ export default function DeleteButton({
 
   const deleteAction = async () => {
     const res = await deleteItemAction(id);
-    toast({title: type, description: res.message });
+    toast({ title: type, description: res.message });
   };
 
   return (

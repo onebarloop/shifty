@@ -10,16 +10,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import TimeslotForm from '@/app/ui/forms/timeslot-form';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import AddMemberButton from '@/app/ui/buttons/add-member';
 import { Button } from '@/components/ui/button';
 import { Trash2, Pencil } from 'lucide-react';
 import EditButton from '@/app/ui/buttons/edit-button';
+import AddTimeslotButton from '@/app/ui/buttons/add-timeslot';
 
 export default function TimeslotTable({
   slots,
@@ -42,7 +37,11 @@ export default function TimeslotTable({
           {slots.map((slot) => (
             <TableRow key={slot.id}>
               <TableCell className="inline-flex flex-wrap gap-2">
-                <DeleteButton type="Delete timeslot" deleteItemAction={deleteTimeslot} id={slot.id}>
+                <DeleteButton
+                  type="Delete timeslot"
+                  deleteItemAction={deleteTimeslot}
+                  id={slot.id}
+                >
                   <Button className="h-6 w-6" size="sm" variant="secondary">
                     <Trash2 />
                   </Button>
@@ -66,12 +65,7 @@ export default function TimeslotTable({
           ))}
           <TableRow>
             <TableCell colSpan={3}>
-              <Popover>
-                <PopoverTrigger className="w-full">Add Timeslot</PopoverTrigger>
-                <PopoverContent>
-                  <TimeslotForm taskId={taskId} />
-                </PopoverContent>
-              </Popover>
+              <AddTimeslotButton taskId={taskId} />
             </TableCell>
           </TableRow>
         </TableBody>
