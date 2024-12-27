@@ -13,7 +13,9 @@ export default async function Page({
   if (event)
     return (
       <>
-        <h1 className="text-2xl font-bold underline mb-4">Event: {event.name}</h1>
+        <h1 className="text-2xl font-bold underline mb-4">
+          Event: {event.name}
+        </h1>
         <div className="flex flex-col gap-2">
           {event.tasks.map((task) => (
             <TaskCard key={task.id} task={task}></TaskCard>

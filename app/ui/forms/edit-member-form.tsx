@@ -34,18 +34,19 @@ export default function EditMemberForm({
   return (
     <>
       <form className="flex flex-col gap-2" action={action}>
-        <input
-          readOnly
-          name="id"
-          type="hidden"
-          value={member.id}
-        />
+        <input readOnly name="id" type="hidden" value={member.id} />
         <Label htmlFor="name">Edit Member</Label>
         <Input name="name" id="name" type="text" defaultValue={member.name} />
 
         <div className="flex justify-between">
-          <Button type="submit" disabled={pending}>Edit</Button>
-          <DeleteButton type="Delete Member" deleteItemAction={deleteMember} id={member.id}>
+          <Button type="submit" disabled={pending}>
+            Edit
+          </Button>
+          <DeleteButton
+            type="Delete Member"
+            deleteItemAction={deleteMember}
+            id={member.id}
+          >
             <Button>
               <Trash2 />
             </Button>
