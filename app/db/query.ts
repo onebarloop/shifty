@@ -1,5 +1,8 @@
 import 'dotenv/config';
-import { db } from './db';
+import { drizzle } from 'drizzle-orm/vercel-postgres';
+import * as schema from './schema';
+
+const db = drizzle({ schema });
 
 export async function getAllEvents() {
   return db.query.events.findMany();
