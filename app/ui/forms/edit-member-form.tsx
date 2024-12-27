@@ -45,7 +45,7 @@ export default function EditMemberForm({
 
         <div className="flex justify-between">
           <Button type="submit" disabled={pending}>Edit</Button>
-          <DeleteButton deleteItemAction={deleteMember} id={member.id}>
+          <DeleteButton type="Delete Member" deleteItemAction={deleteMember} id={member.id}>
             <Button>
               <Trash2 />
             </Button>

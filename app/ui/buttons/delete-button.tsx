@@ -15,16 +15,18 @@ export default function DeleteButton({
   deleteItemAction,
   id,
   children,
+  type
 }: {
   deleteItemAction: (id: number) => Promise<Response>;
   id: number;
   children: React.ReactNode;
+  type?: string;
 }) {
   const { toast } = useToast();
 
   const deleteAction = async () => {
     const res = await deleteItemAction(id);
-    toast({ description: res.message });
+    toast({title: type, description: res.message });
   };
 
   return (

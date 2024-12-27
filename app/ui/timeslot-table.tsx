@@ -42,7 +42,7 @@ export default function TimeslotTable({
           {slots.map((slot) => (
             <TableRow key={slot.id}>
               <TableCell className="inline-flex flex-wrap gap-2">
-                <DeleteButton deleteItemAction={deleteTimeslot} id={slot.id}>
+                <DeleteButton type="Delete timeslot" deleteItemAction={deleteTimeslot} id={slot.id}>
                   <Button className="h-6 w-6" size="sm" variant="secondary">
                     <Trash2 />
                   </Button>
