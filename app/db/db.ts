@@ -10,5 +10,6 @@ if (process.env.ENVIRONMENT === 'local') {
   db = drizzle(process.env.POSTGRES_URL!, { schema });
 } else {
   const { drizzle } = await import('drizzle-orm/vercel-postgres');
+  console.log('test')
   db = drizzle({ schema });
 }
