@@ -18,21 +18,19 @@ export default function Member({ member }: { member: Member }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-  <Dialog open={isOpen} onOpenChange={setIsOpen}>
-    <DialogTrigger asChild>
-      <Button className="p-0 h-fit hover:bg-white">
-        <Badge>{member.name}</Badge>
-      </Button>
-    </DialogTrigger>
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>Edit member</DialogTitle>
-      </DialogHeader>
-      <DialogDescription>
-        Change settings
-      </DialogDescription>
-      <EditMemberForm closeForm={() => setIsOpen(false)} member={member} />
-    </DialogContent>
-  </Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button className="p-0 h-fit hover:bg-white">
+          <Badge>{member.name}</Badge>
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit member</DialogTitle>
+        </DialogHeader>
+        <DialogDescription>Change settings</DialogDescription>
+        <EditMemberForm closeForm={() => setIsOpen(false)} member={member} />
+      </DialogContent>
+    </Dialog>
   );
 }
