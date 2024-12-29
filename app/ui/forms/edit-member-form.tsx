@@ -35,7 +35,7 @@ export default function EditMemberForm({
     <>
       <form className="flex flex-col gap-2" action={action}>
         <input readOnly name="id" type="hidden" value={member.id} />
-        <Label htmlFor="name">Edit Member</Label>
+        <Label htmlFor="name">Name</Label>
         <Input name="name" id="name" type="text" defaultValue={member.name} />
 
         <div className="flex justify-between">

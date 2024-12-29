@@ -7,7 +7,13 @@ import { Button } from '@/components/ui/button';
 import { useActionState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
-export default function MemberForm({ timeslotId }: { timeslotId: number }) {
+export default function MemberForm({
+  timeslotId,
+  closeDialog,
+}: {
+  timeslotId: number;
+  closeDialog: () => void;
+}) {
   const [state, action] = useActionState(createMember, undefined);
   const { toast } = useToast();
 
@@ -18,14 +24,17 @@ export default function MemberForm({ timeslotId }: { timeslotId: number }) {
         description: state.message,
       });
     }
+    if (state?.success) {
+      closeDialog();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
   return (
     <form className="flex flex-col gap-2" action={action}>
       <input type="hidden" name="id" readOnly value={timeslotId} />
-      <Label htmlFor="name">Add Member</Label>
+      <Label htmlFor="name">Name</Label>
       <Input name="name" id="name" type="text" />
-      <Button type="submit">Submit</Button>
+      <Button type="submit">Add</Button>
     </form>
   );
 }
