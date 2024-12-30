@@ -31,9 +31,9 @@ export default function TimeslotForm({
     <form className="flex flex-col gap-2" action={action}>
       <input type="hidden" name="id" value={taskId} readOnly />
       <Label htmlFor="from">From</Label>
-      <Input name="from" id="from" type="number" />
+      <Input name="from" id="from" type="time" />
       <Label htmlFor="to">To</Label>
-      <Input name="to" id="to" type="number" />
+      <Input name="to" id="to" type="time" />
       <Button disabled={pending} type="submit">
         Add Timeslot
       </Button>

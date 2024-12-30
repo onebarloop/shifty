@@ -1,4 +1,4 @@
-import { serial, text, char, integer, pgTable } from 'drizzle-orm/pg-core';
+import { serial, text, char, integer, time, pgTable } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 import { randomUUID } from 'crypto';
 
@@ -32,8 +32,8 @@ export const tasksRelations = relations(tasks, ({ one, many }) => ({
 
 export const timeslots = pgTable('timeslots', {
   id: serial('id').primaryKey(),
-  from: integer('from').notNull(),
-  to: integer('to').notNull(),
+  from: time('from').notNull(),
+  to: time('to').notNull(),
   taskId: integer('task_id')
     .references(() => tasks.id, { onDelete: 'cascade' })
     .notNull(),

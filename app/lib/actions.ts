@@ -35,7 +35,7 @@ export async function createTimeslot(
   if (from && to && id) {
     await db
       .insert(timeslots)
-      .values({ from: Number(from), to: Number(to), taskId: Number(id) });
+      .values({ from: from.toString(), to: to.toString(), taskId: Number(id) });
     revalidatePath(`/[slug]`, 'page');
     return { success: true, message: `Timeslot added` };
   }

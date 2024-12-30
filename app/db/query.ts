@@ -17,6 +17,7 @@ export async function getEventData(slug: string) {
       tasks: {
         with: {
           timeslots: {
+            orderBy: (timeslots, { asc }) => [asc(timeslots.to)],
             with: {
               members: {
                 orderBy: (members, { asc }) => [asc(members.id)],
