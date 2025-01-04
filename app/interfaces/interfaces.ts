@@ -13,8 +13,8 @@ export interface Task {
 
 export interface Timeslot {
   id: number;
-  from: number;
-  to: number;
+  from: string;
+  to: string;
   members: Member[];
 }
 
